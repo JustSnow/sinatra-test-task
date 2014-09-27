@@ -1,0 +1,11 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 5
+  username: postgres
+  password: 123123
+
+development:
+  <<: *common
+  database: test_404_development
