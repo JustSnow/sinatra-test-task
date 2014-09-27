@@ -3,7 +3,7 @@ class CreateStudentsSubjects < ActiveRecord::Migration
     create_table :students_subjects do |t|
       t.belongs_to :student
       t.belongs_to :subject
-      t.integer :ball
+      t.integer :ball, default: 0
     end
 
     add_index :students_subjects, :student_id

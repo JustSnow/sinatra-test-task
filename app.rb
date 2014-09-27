@@ -9,10 +9,13 @@ ActiveRecord::Import.require_adapter('postgresql')
 
 Dir.glob('./models/*.rb').each { |r| require r }
 
-set :haml, { format: :html5, attr_wrapper: '"' }
+set :haml, {
+  format: :html5,
+  attr_wrapper: '"'
+}
 
 get "/" do
-  @students = Student.includes(:student_group, students_subjects: :subject).limit(10)
+  @students = Student.includes(:student_group, students_subjects: :subject)
 
   @students = @students.by_group(params[:student_group_id]) if params[:student_group_id].present?
 
@@ -27,17 +30,17 @@ get "/" do
 
   @student_groups = StudentGroup.all
 
-  haml :index
+  haml :index, layout: !request.xhr?
 end
 
 get '/students/new' do
   @student_groups = StudentGroup.all
-  haml :new
+  haml :new, layout: !request.xhr?
 end
 
 get '/students/best' do
   @best_students = Student.best
-  haml :best
+  haml :best, layout: !request.xhr?
 end
 
 post '/students/new' do
@@ -54,9 +57,19 @@ post '/students/new' do
       end
 
     StudentsSubject.import(st_subs)
+    @student.send(:calculate_average_ball)
 
-    redirect '/'
+    @students =
+      Student.includes(:student_group, students_subjects: :subject).
+        paginate(page: params[:page], per_page: 10)
+    @student_groups = StudentGroup.all
+
+    haml :index, layout: !request.xhr?
   else
-    haml :new
+    if request.xhr?
+      status 204
+    else
+      haml :new
+    end
   end
 end

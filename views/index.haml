@@ -1,31 +1,32 @@
+%form.form-inline{ action: '/', method: :get, role: 'form' }
+  .form-group
+    %select.form-control{ name: 'student_group_id' }
+      - @student_groups.each do |group|
+        %option{ value: '' } Выберите группу
+        %option{ value: group.id }= group.title
+  .form-group
+    %label.sr-only{ for: 'ball_from' } Балл от
+    %input.form-control#ball_from{ type: 'text', name: 'ball_from', placeholder: 'Балл от', value: params[:ball_from] }
+
+  .form-group
+    %label.sr-only{ for: 'ball_to' } Балл до
+    %input.form-control#ball_to{ type: 'text', name: 'ball_to', placeholder: 'Балл до', value: params[:ball_to] }
+
+  .form-group
+    %label.sr-only{ for: 'student_name' } Имя
+    %input.form-control#student_name{ type: 'text', name: 'student_name', placeholder: 'Имя', value: params[:student_name] }
+
+  .form-group
+    %label.sr-only{ for: 'semester' } Семестр
+    %input.form-control#semester{ type: 'text', name: 'semester', placeholder: 'Семестр', value: params[:semester] }
+
+  .form-group
+    %label.sr-only{ for: 'student_ip' } IP
+    %input.form-control#student_ip{ type: 'text', name: 'student_ip', placeholder: 'IP', value: params[:student_ip] }
+
+  %button{ type: 'submit', class: 'btn btn-primary' } Фильтровать
+
 - if @students.present?
-  %form.form-inline{ action: '/', method: :get, role: 'form' }
-    .form-group
-      %select.form-control{ name: 'student_group_id' }
-        - @student_groups.each do |group|
-          %option{ value: '' } Выберите группу
-          %option{ value: group.id }= group.title
-    .form-group
-      %label.sr-only{ for: 'ball_from' } Балл от
-      %input.form-control#ball_from{ type: 'text', name: 'ball_from', placeholder: 'Балл от', value: params[:ball_from] }
-
-    .form-group
-      %label.sr-only{ for: 'ball_to' } Балл до
-      %input.form-control#ball_to{ type: 'text', name: 'ball_to', placeholder: 'Балл до', value: params[:ball_to] }
-
-    .form-group
-      %label.sr-only{ for: 'student_name' } Имя
-      %input.form-control#student_name{ type: 'text', name: 'student_name', placeholder: 'Имя', value: params[:student_name] }
-
-    .form-group
-      %label.sr-only{ for: 'semester' } Семестр
-      %input.form-control#semester{ type: 'text', name: 'semester', placeholder: 'Семестр', value: params[:semester] }
-
-    .form-group
-      %label.sr-only{ for: 'student_ip' } IP
-      %input.form-control#student_ip{ type: 'text', name: 'student_ip', placeholder: 'IP', value: params[:student_ip] }
-
-    %button{ type: 'submit', class: 'btn btn-primary' } Фильтровать
 
   %h4 Список студентов
   = will_paginate @students, renderer: BootstrapPagination::Sinatra

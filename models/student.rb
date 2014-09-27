@@ -34,6 +34,6 @@ class Student < ActiveRecord::Base
   private
 
   def calculate_average_ball
-    update_column(:average_ball, sprintf('%.2f', students_subjects.average(:ball)))
+    update_column(:average_ball, sprintf('%.2f', students_subjects.average(:ball) || 0))
   end
 end
