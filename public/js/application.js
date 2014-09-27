@@ -7,6 +7,7 @@ $(document).ready(function(){
       type: 'GET',
       url: link.attr('href'),
       success: function(data) {
+        window.history.pushState('', link.data('title'), link.attr('href'));
         $('#main_content').html(data);
       }
     });

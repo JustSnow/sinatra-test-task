@@ -3,15 +3,16 @@
   %head
     %meta{ :'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
     %link{ rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" }
+    %title Реестр студентов
   %body
     .container
       %ul
         %li
-          %a{ href: '/' } На главную
+          %a{ href: '/', data: { title: 'Реестр студентов' } } На главную
         %li
-          %a{ href: 'students/new' } Добавить студента
+          %a{ href: '/students/new', data: { title: 'Добавить студента' } } Добавить студента
         %li
-          %a{ href: 'students/best' } Десятка лучших
+          %a{ href: '/students/best', data: { title: 'Десятка лучших' } } Десятка лучших
 
       #main_content= yield
 
