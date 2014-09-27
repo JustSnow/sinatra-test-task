@@ -20,6 +20,8 @@ build/
 /doc/
 /rdoc/
 
+config/database.yml
+
 ## Environment normalisation:
 /.bundle/
 /lib/bundler/man/

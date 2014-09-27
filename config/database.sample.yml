@@ -3,8 +3,8 @@ common: &common
   encoding: unicode
   host: localhost
   pool: 5
-  username: postgres
-  password: 123123
+  username: user
+  password: password
 
 development:
   <<: *common
