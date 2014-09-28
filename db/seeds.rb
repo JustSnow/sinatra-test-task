@@ -115,6 +115,6 @@ progressbar_students_ball =
   })
 
 _students.find_each do |student|
-  student.update_attribute(:updated_at, Time.now)
+  student.send(:calculate_average_ball)
   progressbar_students_ball.increment
 end

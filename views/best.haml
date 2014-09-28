@@ -1,4 +1,8 @@
 %h3 Десятка лучших
 %ol
   - @best_students.each do |student|
-    %li= "#{ student.full_name }: #{ student.average_ball }"
+    %li
+      %p
+        = "#{ student.full_name }:"
+        &nbsp;
+        %span.label.label-primary= student.average_ball

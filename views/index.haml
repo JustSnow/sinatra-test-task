@@ -31,7 +31,7 @@
   %h4 Список студентов
   = will_paginate @students, renderer: BootstrapPagination::Sinatra
 
-  %table.table.table-bordered
+  %table.table.table-bordered.table-striped
     %thead
       %tr
         %th ФИО
@@ -42,12 +42,15 @@
       - @students.each do |student|
         %tr
           %td
-            %p= student.full_name
-            %p= "Средний бал: #{ student.average_ball }"
+            %p.bg-warning= student.full_name
+            %p
+              Средний бал:
+              &nbsp;
+              %span.label.label-primary= student.average_ball
             %p= "Семестр: #{ student.number_of_semester }"
           %td= student.student_group_title
           %td
-            %p= "ip: #{ student.student_ip }"
+            %p.text-success= "ip: #{ student.student_ip }"
             %ol
               - student.students_subjects.each do |st_sub|
                 %li= "#{ st_sub.subject_title }: #{ st_sub.ball }"
