@@ -32,7 +32,7 @@ class IndexPresenter
   end
 
   def with_paginate
-    students.paginate(page: params[:page], per_page: 10)
+    students.paginate(page: params[:page], per_page: 50)
   end
 
   def all_scoup

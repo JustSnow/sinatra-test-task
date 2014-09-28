@@ -22,6 +22,11 @@ $(document).ready(function(){
       data: form.serialize(),
       url: form.attr('action'),
       success: function(data) {
+        if (form.attr('method').toLowerCase() == 'get') {
+          href = 'http://' + window.location.host + '/?' + form.serialize()
+          window.history.pushState('', form.data('title'), href);
+        }
+
         $('#main_content').html(data);
       }
     });
