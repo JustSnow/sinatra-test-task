@@ -38,7 +38,9 @@ class Student < ActiveRecord::Base
   private
 
   def calculate_average_ball
-    update_column(:average_ball, sprintf('%.2f', students_subjects.average(:ball) || 0))
+    if average_ball == 0.0
+      update_column(:average_ball, sprintf('%.2f', students_subjects.average(:ball) || 0))
+    end
   end
 
   def generate_number_of_semester
