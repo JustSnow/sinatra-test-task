@@ -55,9 +55,32 @@ post '/students/new' do
     haml :index, layout: !request.xhr?
   else
     if request.xhr?
-      status 204
+     status 500
     else
       haml :new
+    end
+  end
+end
+
+get '/students/:id/edit' do
+  @student = Student.find(params[:id])
+  @student_groups = StudentGroup.all
+  haml :edit, layout: !request.xhr?
+end
+
+post '/students/:id/update' do
+  @student = Student.find(params[:id])
+
+  if @student.update_attributes(params[:student])
+    @students       = IndexPresenter.new(params).with_paginate
+    @student_groups = StudentGroup.all
+
+    haml :index, layout: !request.xhr?
+  else
+    if request.xhr?
+     status 500
+    else
+      haml :edit
     end
   end
 end

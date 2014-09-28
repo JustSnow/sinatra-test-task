@@ -7,8 +7,10 @@ class IndexPresenter
   cattr_accessor :students
 
   def initialize(opts = {})
-    self.params = opts
-    self.students = Student.includes(:student_group, students_subjects: :subject)
+    self.params   = opts
+    self.students =
+      Student.includes(:student_group, students_subjects: :subject).
+      order(id: :desc)
   end
 
   def filter_groups

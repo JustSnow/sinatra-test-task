@@ -21,13 +21,16 @@ $(document).ready(function(){
       type: form.attr('method'),
       data: form.serialize(),
       url: form.attr('action'),
-      success: function(data) {
+      success: function(data, textStatus, jqXHR) {
         if (form.attr('method').toLowerCase() == 'get') {
           href = 'http://' + window.location.host + '/?' + form.serialize()
           window.history.pushState('', form.data('title'), href);
         }
 
         $('#main_content').html(data);
+      },
+      error: function(data) {
+        alert(form.data('error-message'));
       }
     });
   });

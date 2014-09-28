@@ -34,26 +34,31 @@
   %table.table.table-bordered.table-striped
     %thead
       %tr
-        %th ФИО
-        %th Группа
+        %th Студент
         %th Краткие данные
         %th Хар-ка
     %tbody
       - @students.each do |student|
         %tr
-          %td
-            %p.bg-warning= student.full_name
-            %p
-              Средний бал:
-              &nbsp;
-              %span.label.label-primary= student.average_ball
-            %p= "Семестр: #{ student.number_of_semester }"
-          %td= student.student_group_title
+          %td.col-md-4
+            %dl.dl-horizontal
+              %dt ФИО:
+              %dd
+                %span.bg-warning
+                  %a{ href: "/students/#{ student.id }/edit" }= student.full_name
+              %dt Средний бал:
+              %dd
+                %span.label.label-primary= student.average_ball
+              %dt Семестр:
+              %dd= student.number_of_semester
+              %dt Группа:
+              %dd= student.student_group_title
           %td
             %p.text-success= "ip: #{ student.student_ip }"
-            %ol
+            %dl.dl-horizontal
               - student.students_subjects.each do |st_sub|
-                %li= "#{ st_sub.subject_title }: #{ st_sub.ball }"
+                %dt= "#{ st_sub.subject_title }:"
+                %dd.text-danger= st_sub.ball
           %td.col-md-4= student.characteristic
 
   = will_paginate @students, renderer: BootstrapPagination::Sinatra

@@ -1,0 +1,42 @@
+%h3= "Редактирование студента: #{ @student.full_name }"
+%form{ action: "/students/#{ @student.id }/update", method: :post, role: 'form', class: 'form-horizontal', data: { title: 'Редактирование студента', error_message: 'Заполнены не все обязательные поля' } }
+  .form-group
+    %label{ for: 'student_name', class: 'col-sm-2 control-label' } Имя студента
+    .col-sm-10
+      %input.form-control{ type: 'text', id: 'student_name', name: 'student[name]', value: @student.name }
+
+  .form-group
+    %label{ for: 'student_surname', class: 'col-sm-2 control-label' } Фамилия студента
+    .col-sm-10
+      %input.form-control{ type: 'text', id: 'student_surname', name: 'student[surname]', value: @student.surname }
+
+  - if @student_groups.present?
+    .form-group
+      %label{ for: 'student_group', class: 'col-sm-2 control-label' } Учебная группа
+      .col-sm-10
+        %select#student_group.form-control{ name: 'student[student_group_id]' }
+          - @student_groups.each do |group|
+            %option{ value: group.id, selected: @student.student_group_id == group.id }= group.title
+
+  .form-group
+    %label{ for: 'student_birthday', class: 'col-sm-2 control-label' } Др студента
+    .col-sm-10
+      %input.form-control{ type: 'text', id: 'student_birthday', name: 'student[birthday]', value: @student.birthday }
+
+  .form-group
+    %label{ for: 'student_email', class: 'col-sm-2 control-label' } E-mail студента
+    .col-sm-10
+      %input.form-control{ type: 'text', id: 'student_email', name: 'student[email]', value: @student.email }
+
+  .form-group
+    %label{ for: 'student_student_ip', class: 'col-sm-2 control-label' } Ip студента
+    .col-sm-10
+      %input.form-control{ type: 'text', id: 'student_student_ip', name: 'student[student_ip]', value: @student.student_ip }
+
+  .form-group
+    %label{ for: 'student_created_at', class: 'col-sm-2 control-label' } Время регистрации студента
+    .col-sm-10
+      %input.form-control{ type: 'text', id: 'student_created_at', name: 'student[created_at]', value: @student.created_at }
+
+  .form-group
+    %button{ type: 'submit', class: 'btn btn-primary' } Обновить
