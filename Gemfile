@@ -10,3 +10,4 @@ gem "sinatra-activerecord"
 gem 'haml'
 gem 'shotgun'
 gem 'will_paginate-bootstrap'
+gem 'memoist'

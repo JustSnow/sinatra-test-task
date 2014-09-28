@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+  before_save :generate_number_of_semester, unless: :number_of_semester?
   after_save :calculate_average_ball
 
   scope :best, -> { order(average_ball: :desc).limit(10) }
@@ -35,5 +36,9 @@ class Student < ActiveRecord::Base
 
   def calculate_average_ball
     update_column(:average_ball, sprintf('%.2f', students_subjects.average(:ball) || 0))
+  end
+
+  def generate_number_of_semester
+    self.number_of_semester = rand(1..5)
   end
 end

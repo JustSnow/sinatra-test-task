@@ -5,7 +5,7 @@ ActiveRecord::Import.require_adapter('postgresql')
 
 STUDENT_GROUP_COUNT = 10
 SUBJECT_COUNT = 20
-STUDENTS_COUNT = 1000000
+STUDENTS_COUNT = 1000
 
 progressbar_student_groups =
   ProgressBar.create({

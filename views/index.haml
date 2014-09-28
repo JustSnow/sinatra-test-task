@@ -1,9 +1,9 @@
 %form.form-inline{ action: '/', method: :get, role: 'form' }
   .form-group
     %select.form-control{ name: 'student_group_id' }
+      %option{ value: '' } Выберите группу
       - @student_groups.each do |group|
-        %option{ value: '' } Выберите группу
-        %option{ value: group.id }= group.title
+        %option{ value: group.id, selected: params[:student_group_id] == group.id }= group.title
   .form-group
     %label.sr-only{ for: 'ball_from' } Балл от
     %input.form-control#ball_from{ type: 'text', name: 'ball_from', placeholder: 'Балл от', value: params[:ball_from] }
