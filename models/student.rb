@@ -6,7 +6,10 @@ class Student < ActiveRecord::Base
   scope :by_group, ->(group_id) { where(student_group_id: group_id) }
   scope :by_name, ->(st_name) { where('name ILIKE :text', text: "%#{ st_name }%") }
   scope :by_semester, ->(semester) { where(number_of_semester: semester) }
-  scope :by_ip_with_cahracteristic, ->(ip) { where(student_ip: ip).where.not(characteristic: nil) }
+  scope :by_ip_with_cahracteristic, ->(ip) {
+    where('student_ip ILIKE :text', text: "%#{ ip }%").
+    where.not(characteristic: nil)
+  }
   scope :by_average_ball, ->(from = nil, to = nil) {
     if from.present? && to.present?
       where(average_ball: from..to)
